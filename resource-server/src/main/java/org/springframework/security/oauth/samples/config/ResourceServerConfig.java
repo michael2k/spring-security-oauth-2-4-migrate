@@ -45,6 +45,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	public void configure(HttpSecurity http) throws Exception {
 		// @formatter:off
 		http
+			.csrf().disable()
+			.headers().frameOptions().disable()
+			.and()
 			.antMatcher("/messages/**")
 			.authorizeRequests()
 				.antMatchers("/messages/**").access("#oauth2.hasScope('message.read')");
